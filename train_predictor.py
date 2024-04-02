@@ -165,7 +165,7 @@ if __name__ == '__main__':
         mode='min',
     )
 
-    model = Trainer(opt=conf)
+    model = Trainer()
     trainer = L.Trainer(logger=wandb_logger, max_epochs=conf.train.train_epochs, accelerator="gpu", devices=conf.train.gpu_ids,
                         callbacks=[checkpoint_callback],
                         val_check_interval=0.1,
