@@ -157,9 +157,6 @@ if __name__ == '__main__':
     wandb_logger = WandbLogger(name=today_str, project='DeepfakeDetection',
                                job_type='train', group=conf.name)
 
-    if os.getenv("LOCAL_RANK", '0') == '0':
-        archive_files(today_str, exclude_dirs=['logs', 'wandb', '.git'])
-
     checkpoint_callback = ModelCheckpoint(
         monitor='val_loss',
         dirpath=os.path.join('logs', today_str),
