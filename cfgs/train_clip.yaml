@@ -1,7 +1,7 @@
 name: "clip"  # Name of the experiment for organizing samples and models
 
 train:
-  gpu_ids: [0,1]  # GPU IDs to use for training, e.g., '0' for single GPU or '0,1,2,3' for multiple GPUs
+  gpu_ids: [0]  # GPU IDs to use for training, e.g., '0' for single GPU or '0,1,2,3' for multiple GPUs
   train_epochs: 20  # Number of training epochs
   gradient_accumulation_steps: 1
   check_val_every_n_epoch: 1

@@ -44,12 +44,14 @@ class Trainer(L.LightningModule):
             nn.Linear(16, 1)
         )
 
+        self.criterion1 = nn.MSELoss()
+        self.criterion2 = nn.L1Loss()
 
     def training_step(self, batch):
         x, y = batch
         features = self.backbone.encode_image(x) 
         scores = self.header(features)
-        loss = F.mse_loss(scores, y)
+        loss = self.criterion1(scores, y) + self.criterion2(scores, y)
         self.log("train_loss", loss)
         return loss
 
@@ -57,7 +59,8 @@ class Trainer(L.LightningModule):
         x, y = batch
         features = self.backbone.encode_image(x) 
         scores = self.header(features)
-        loss = F.mse_loss(scores, y)
+        import pdb;pdb.set_trace()
+        loss = self.criterion1(scores, y) + self.criterion2(scores, y)
         self.log("val_loss", loss)
         return loss
 
