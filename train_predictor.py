@@ -1,6 +1,5 @@
 import os
 import argparse
-from ssl import OP_ENABLE_KTLS
 import numpy as np
 import pandas as pd
 import wandb
