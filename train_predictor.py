@@ -26,7 +26,7 @@ from lightning.pytorch.callbacks import ModelCheckpoint
 class Trainer(L.LightningModule):
     def __init__(self, opt):
         super().__init__()
-        self.opt = OP_ENABLE_KTLS
+        self.opt = opt
         self.save_hyperparameters()
         self.backbone, _ = clip.load("ViT-L/14", device="cpu")
 
