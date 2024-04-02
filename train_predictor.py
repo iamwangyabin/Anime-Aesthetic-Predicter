@@ -152,7 +152,7 @@ if __name__ == '__main__':
     train_loader = DataLoader(train_dataset, batch_size=conf.dataset.batch_size, shuffle=True, num_workers=conf.dataset.loader_workers)
     val_loader = DataLoader(val_dataset, batch_size=conf.dataset.batch_size, shuffle=False, num_workers=conf.dataset.loader_workers)
 
-    today_str = conf.name +"_"+ datetime.datetime.now().strftime('%Y%m%d_%H_%M_%S')
+    today_str = conf.name +"_"+ datetime.now().strftime('%Y%m%d_%H_%M_%S')
 
     wandb_logger = WandbLogger(name=today_str, project='DeepfakeDetection',
                                job_type='train', group=conf.name)
