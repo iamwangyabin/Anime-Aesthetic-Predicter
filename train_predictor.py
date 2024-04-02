@@ -50,7 +50,7 @@ class Trainer(L.LightningModule):
     def training_step(self, batch):
         x, y = batch
         features = self.backbone.encode_image(x) 
-        scores = self.header(features)
+        scores = self.header(features).squeeze()
         loss = self.criterion1(scores, y) + self.criterion2(scores, y)
         self.log("train_loss", loss)
         return loss
@@ -58,8 +58,7 @@ class Trainer(L.LightningModule):
     def validation_step(self, batch):
         x, y = batch
         features = self.backbone.encode_image(x) 
-        scores = self.header(features)
-        import pdb;pdb.set_trace()
+        scores = self.header(features).squeeze()
         loss = self.criterion1(scores, y) + self.criterion2(scores, y)
         self.log("val_loss", loss)
         return loss
