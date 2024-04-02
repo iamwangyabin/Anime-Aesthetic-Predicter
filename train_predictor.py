@@ -1,5 +1,6 @@
 import os
 import argparse
+from ssl import OP_ENABLE_KTLS
 import numpy as np
 import pandas as pd
 import wandb
@@ -24,8 +25,9 @@ from lightning.pytorch.callbacks import ModelCheckpoint
 
 
 class Trainer(L.LightningModule):
-    def __init__(self):
+    def __init__(self, opt):
         super().__init__()
+        self.opt = OP_ENABLE_KTLS
         self.save_hyperparameters()
         self.backbone, _ = clip.load("ViT-L/14", device="cpu")
 
@@ -165,7 +167,7 @@ if __name__ == '__main__':
         mode='min',
     )
 
-    model = Trainer()
+    model = Trainer(conf)
     trainer = L.Trainer(logger=wandb_logger, max_epochs=conf.train.train_epochs, accelerator="gpu", devices=conf.train.gpu_ids,
                         callbacks=[checkpoint_callback],
                         val_check_interval=0.1,
